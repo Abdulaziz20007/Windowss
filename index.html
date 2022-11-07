@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/fav.png" type="image/x-icon">
+    <title>Windows lock screen</title>
+</head>
+<body id="body">
+    <div id="lockscreen" class="body" ondblclick="openpassinput()">
+        <div id="dates" class="clock">
+            <h1 id="clock"></h1>
+            <h2 id="today"></h2>
+        </div>
+        <div id="blur" class="blur">
+            <div style="display: flex; align-items: center; height: 100%;">
+                <div id="inputs" style="opacity: 0; position: absolute; top: -1000rem; cursor: context-menu;">
+                    <div id="usericon" class="usericon"></div>
+                    <div id="username" class="username">
+                        <h1 id="name"></h1><br>
+                        <div class="passes">
+                            <div class="passer">
+                                <input id="passinput" style="cursor: context-menu;" type="password">
+                                <button id="myBtn1" onclick="checkpass()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<button id="myBtn" style="display: none;" onclick="openpassinput()"></button>
+<script>
+
+let username = prompt('Username:')
+document.getElementById('name').innerHTML = username;
+
+// clock
+  const today1 = new Date();
+  let h = today1.getHours();
+  let m = today1.getMinutes();
+  m = checkTime(m);
+  document.getElementById('clock').innerHTML =  h + ":" + m ;
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};
+  return i;
+}
+
+
+// today
+
+let objToday = new Date(),
+	weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+	dayOfWeek = weekday[objToday.getDay()],
+	domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return ""; a = parseInt((a + "").charAt(1)); return 1 == a ? "" : 2 == a ? "" : 3 == a ? "" : "" }(),
+	dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+	months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+	curMonth = months[objToday.getMonth()],
+	curYear = objToday.getFullYear(),
+	curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
+	curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+	curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
+	curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+let today0 = dayOfWeek + ", " + curMonth + ' ' + dayOfMonth;
+document.getElementById('today').innerHTML = today0;
+
+
+
+
+function openpassinput() {
+    document.getElementById('inputs').style.position = 'unset';
+    document.getElementById('dates').style.marginBottom = '100rem'
+    setTimeout(()=>{
+        document.getElementById('dates').style.display = 'none'
+    }, 1000)
+    setTimeout(() => {
+        document.getElementById('blur').className = 'blur1'
+    }, 0300);
+    document.getElementById('inputs').className = 'inputs';
+    document.getElementById('passinput').style.cursor = 'auto'
+    let input1 = document.getElementById("passinput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn1").click();
+  }
+});
+}
+
+let input = document.getElementById("body");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+  }
+});
+
+
+let pass = 5555;
+
+function checkpass() {
+    let inpass = document.getElementById('passinput').value;
+    if(inpass != pass) {
+        alert('Wrong!');
+    }
+    if(inpass == pass) {
+        document.getElementById('lockscreen').style.opacity = '0';
+        
+        setTimeout(() => {
+            document.getElementById('lockscreen').style.display = 'none';
+            window.open('./desktop.html', '_self');
+        }, 1000);
+    }
+}
+</script>
+</body>
+</html>

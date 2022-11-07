@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="desktop.css">
+    <title>Desktop</title>
+</head>
+<body>
+    <button id="turnon" onclick="turnon()" style="z-index: 1002; display: none; height: 100px; width: 300px; position: absolute; top: 40%; left: 40%; cursor: pointer;">Turn on</button>
+    <div id="black"></div>
+    <div id="shutdown" class="shutdown">
+        <div class='loader'>
+            <div class="bg"></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+          </div>
+        <h1 style="cursor: default;">Shuting down</h1>
+    </div>
+    <div id="welcome" class="shutdown">
+        <div class='loader'>
+            <div class="bg"></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+          </div>
+        <h1 style="cursor: default;">Welcome</h1>
+    </div>
+    <div id="restart" class="shutdown">
+        <div class='loader'>
+            <div class="bg"></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+            <div class='circle'></div>
+          </div>
+        <h1 style="cursor: default;">Restart</h1>
+    </div>
+    <div onclick="document.getElementById('mydiv').style.zIndex = 11;
+    document.getElementById('two').style.zIndex = 10;
+    document.getElementById('three').style.zIndex = 10;" id="mydiv">
+        <div id="mydivheader">
+            <div class="left">
+                <img style="width: 20px; height: 20px;" src="./assets/pc.png" alt="">
+                <h1>This pc</h1>
+            </div>
+            <div class="right">
+                <button class="btn0" onclick="hidepc()">-</button>
+                <button class="btn1" onclick="closepc()">X</button>
+            </div>
+        </div>
+      </div>
+    <div onclick="document.getElementById('two').style.zIndex = 11;
+    document.getElementById('mydiv').style.zIndex = 10;
+    document.getElementById('three').style.zIndex = 10;" id="two">
+        <div id="twoheader">
+            <div class="left">
+                <img style="width: 20px; height: 20px;" src="./assets/notepad.png" alt="">
+                <h1>Notepad</h1>
+            </div>
+            <div class="right">
+                <button class="btn0" onclick="hidenotepad()">-</button>
+                <button class="btn1" onclick="closenotepad()">X</button>
+            </div>
+        </div>
+        <textarea style="font-size: 22px; padding: 2px; border: none; outline: none; resize: none; height: 93.3%; width: 100%;"></textarea>
+      </div>
+      <div onclick="document.getElementById('three').style.zIndex = 11;
+    document.getElementById('two').style.zIndex = 10;
+    document.getElementById('mydiv').style.zIndex = 10;" id="three">
+        <div id="threeheader">
+            <div class="left">
+                <img style="width: 20px; height: 20px;" src="./assets/recycle.png" alt="">
+                <h1>Recycle bin</h1>
+            </div>
+            <div class="right">
+                <button class="btn0" onclick="hiderecycle()">-</button>
+                <button class="btn1" onclick="closerecycle()">X</button>
+            </div>
+        </div>
+      </div>
+    <div class="icons">
+    <div id="pc" onclick="selectpc()" ondblclick="openpc()" class="icon">
+        <img src="./assets/pc.png" alt="">
+        <a href="#">This pc</a>
+    </div>
+    <div id="notepad" onclick="selectnotepad()" ondblclick="opennotepad()" class="icon">
+        <img src="./assets/notepad.png" alt="">
+        <a href="#">Notepad</a>
+    </div>
+    <div id="recycle" onclick="selectrecycle()" ondblclick="openrecycle()" class="icon">
+        <img src="./assets/recycle.png" alt="">
+        <a href="#">Recycle bin</a>
+    </div>
+    </div>
+
+<div class="closedmenu" id="menu">
+    <select id="rejim">
+        <option value="shut">Shut down</option>
+        <option value="res">Restart</option>
+    </select>
+    <button onclick="shut()" class="btn">></button>
+</div>
+<footer>
+    <div onclick="openmenu()" class="pusk"></div>
+</footer>
+    <script>
+        function shut() {
+            let shut = document.getElementById('rejim').value;
+            if(shut !== "res") {
+                document.getElementById('shutdown').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('shutdown').style.display = 'none';
+                    document.getElementById('black').className = 'black';
+                }, 5000);
+                setTimeout(() => {
+                    document.getElementById('turnon').style.display = 'block';
+                }, 6000);
+            }
+            else {
+                document.getElementById('restart').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('black').className = 'black';
+                    document.getElementById('restart').style.display = 'none';
+                }, 5000);
+                setTimeout(() => {
+                    document.getElementById('black').className = ' ';
+                    document.getElementById('welcome').style.display = 'block';
+                }, 9000);
+                setTimeout(() => {
+                    window.open('./index.html', '_self');
+                }, 15000);
+            }
+        }
+        function turnon() {
+            document.getElementById('turnon').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('black').className = ' ';
+                document.getElementById('welcome').style.display = 'block';
+            }, 5000);
+            setTimeout(() => {
+                window.open('./index.html', '_self');
+            }, 10000);
+        }
+        
+
+        function selectpc() {
+            document.getElementById('notepad').style = " "
+            document.getElementById('recycle').style = " "
+            document.getElementById('pc').style = "background: rgba(255, 255, 255, 0.16); border-radius: 5px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); border: 1px solid rgba(255, 255, 255, 0.5);"
+        }
+        function selectrecycle() {
+            document.getElementById('notepad').style = " "
+            document.getElementById('pc').style = " "
+            document.getElementById('recycle').style = "background: rgba(255, 255, 255, 0.16); border-radius: 5px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); border: 1px solid rgba(255, 255, 255, 0.5);"
+        }
+        function selectnotepad() {
+            document.getElementById('recycle').style = " "
+            document.getElementById('pc').style = ""
+            document.getElementById('notepad').style = "background: rgba(255, 255, 255, 0.16); border-radius: 5px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); border: 1px solid rgba(255, 255, 255, 0.5);"
+        }
+        function openpc() {
+            document.getElementById('mydiv').style = 'z-index: 11; display:block; width: 400px; height: 500px; top:80px; left:500px;'
+        }
+        function opennotepad() {
+            document.getElementById('two').style = 'z-index: 11; display:block; width: 400px; height: 500px; top:80px; left:500px;'
+        }
+        function openrecycle() {
+            document.getElementById('three').style = 'z-index: 11; display:block; width: 400px; height: 500px; top:80px; left:500px;'
+        }
+        function closepc() {
+            document.getElementById('mydiv').style = 'display: none;'
+        }
+        function hidepc() {
+            document.getElementById('mydiv').style = 'display: none;'
+        }
+        function closenotepad() {
+            document.getElementById('two').style = 'display: none;'
+        }
+        function hidenotepad() {
+            document.getElementById('two').style = 'display: none;'
+        }
+        function closerecycle() {
+            document.getElementById('three').style = 'display: none;'
+        }
+        function hiderecycle() {
+            document.getElementById('three').style = 'display: none;'
+        }
+        function openmenu() {
+            if(document.getElementById('menu').className !== "openmenu") {
+                document.getElementById('menu').className = "openmenu"
+            }
+            else {
+                document.getElementById('menu').className = "closedmenu"
+            }
+        }
+    </script>
+
+<script>
+    //Make the DIV element draggagle:
+    dragElement(document.getElementById("two"));
+    
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        /* if present, the header is where you move the DIV from:*/
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+      }
+    
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+    
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+    
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    </script>
+    <script>
+    //Make the DIV element draggagle:
+    dragElement(document.getElementById("mydiv"));
+    
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        /* if present, the header is where you move the DIV from:*/
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+      }
+    
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+    
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+    
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    </script>
+    <script>
+        //Make the DIV element draggagle:
+        dragElement(document.getElementById("three"));
+        
+        function dragElement(elmnt) {
+          var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+          if (document.getElementById(elmnt.id + "header")) {
+            /* if present, the header is where you move the DIV from:*/
+            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+          } else {
+            /* otherwise, move the DIV from anywhere inside the DIV:*/
+            elmnt.onmousedown = dragMouseDown;
+          }
+        
+          function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+          }
+        
+          function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+          }
+        
+          function closeDragElement() {
+            /* stop moving when mouse button is released:*/
+            document.onmouseup = null;
+            document.onmousemove = null;
+          }
+        }
+        </script>
+    
+</body>
+</html>
